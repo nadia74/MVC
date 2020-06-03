@@ -1,0 +1,65 @@
+{% if erreur is defined %}
+{{erreur}}
+{% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>{{ base }}</p>
+        <form  name="sentMessage" id="contactForm" method="post" novalidate>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Name" id="name" name="username" required
+                 data-validation-required-message="Please enter your name.">
+                 {% if erreurname is defined %}
+                  {{erreurname}}
+                {% endif %}
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Email Address</label>
+              <input type="email" class="form-control" placeholder="Email Address" id="email" name="email"
+                required data-validation-required-message="Please enter your email address.">
+                {% if erreurmail is defined %}
+                  {{erreurmail}}
+                {% endif %}
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password" id="password" name="password"
+               required data-validation-required-message="Please enter your password.">
+               {% if erreurpassvoid is defined %}
+                  {{erreurpassvoid}}
+                {% endif %}
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+           </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Password Confirmation</label>
+              <input type="password" class="form-control" placeholder="Passwordconfirmation" id="passwordconfirmation" name="passwordconfirmation"
+               required data-validation-required-message="Please enter again your password.">
+               {% if erreurpassverifvoid is defined %}
+                  {{erreurpassverifvoid}}
+                {% endif %}
+               {% if erreurpass is defined %}
+                  {{erreurpass}}
+                {% endif %}
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-secondary" id="sendMessageButton">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,141 @@
+<div class="titreadmin" align="center">Créer un nouvel utilisateur</div>
+<form id="creation" method="post"><input type="hidden" name="id" value="creation" /></form>
+Nom de l'utilisateur<input form="creation" type="text" name="username" value="" /><br>
+Email<input form="creation" type="email" name="email" value="" /><br>
+Mot de passe<input form="creation" type="password" name="password" value="" /><br>
+Droits<br>
+<label for ="reader">Reader</label>
+<input  form="creation" type="radio" name="group" value="reader" /><br>
+<label for ="writer">Writer</label>
+<input form="creation" type="radio" name="group" value="writer" /><br>
+<label for ="admin">Admin</label>
+<input form="creation" type="radio" name="group" value="admin" /><br>
+<div align="right"><input  form="creation" type="submit" value="valider" /></div>
+<div class ="espaceadmin"></div>
+<table>
+   <caption class="titreadmin">Utilisateurs du blog</caption>
+
+   <tr>
+        <th></th>
+        <th>Nom</th>
+        <th>email</th>
+        <th>Droits</th>
+        <th>Moderation</th>
+        <th>Activé</th>
+        <th>Création</th>
+        <th>Modification</th>
+        <th>Supprimer</th>
+    </tr>
+    
+
+    {% for item in user %}
+   <tr id ="users">
+        <td><form id="{{"form" ~ item.id}}" method="post"><input type="hidden" name="id" value="{{item.id}}" /></form></td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.email }}</td>
+        <td>    
+        {% set selected = '' %}
+        {% if item.group == 'reader' %}
+        {% set selected = 'checked' %}
+        {% endif %}
+        <p>
+        <label for ="reader">
+        <input  type="radio" id="group" name="group" form="{{"form" ~ item.id}}" value="reader" {{selected}}>
+        <span>Reader</span>
+        </label>
+        </p>
+        {% set selected = '' %}
+        {% if  item.group == 'writer' %}
+        {% set selected = 'checked' %}
+        {% endif %}
+        <p>
+        <label for ="writer">
+        <input type="radio" id="group" name="group" form="{{"form" ~ item.id}}" value="writer" {{selected}}>
+        <span>Writer</span>
+        </label>
+        </p>
+
+        {% set selected = '' %}
+        {% if  item.group == 'admin' %}
+        {% set selected = 'checked' %}
+        {% endif %}
+        <p>
+        <label for ="admin">
+        <input type="radio" id="group" name="group" form="{{"form" ~ item.id}}" value="admin" {{selected}}>
+        <span>Admin</span>
+        </label>
+        </p>
+        </td>
+
+        <td>
+        {% set selected = '' %}
+        {% if item.banned %}
+        {% set selected = 'checked' %}
+        {% endif %}
+
+        <p>
+         <label for ="banned">
+        <input type="radio" id="banned" name="banned" form="{{"form" ~ item.id}}" value="banned" {{selected}}>
+        <span>Banni</span>
+        </label>
+        </p>
+
+
+        {% set selected = '' %}
+        {% if not item.banned %}
+        {% set selected = 'checked' %}
+        {% endif %}
+
+        <p>
+        <label for ="allowed">
+        <input type="radio" id="banned" name="banned" form="{{"form" ~ item.id}}" value="allowed" {{selected}}>
+        <span>Actif</span>
+        </label>
+        </p>
+
+        </td>
+        
+        <td>
+        {% set selected = '' %}
+        {% if item.accountactivation %}
+        {% set selected = 'checked' %}
+        {% endif %}
+
+        <p>
+         <label for ="accact">
+        <input type="radio" id="accountactivation" name="accountactivation" form="{{"form" ~ item.id}}" value="activated" {{selected}}>
+        <span>Activé</span>
+        </label>
+        <p>
+
+
+        {% set selected = '' %}
+        {% if not item.accountactivation %}
+        {% set selected = 'checked' %}
+        {% endif %}
+        <p>
+        <label for ="desaccact">
+        <input type="radio" id="accountactivation" name="accountactivation" form="{{"form" ~ item.id}}" value="notactivated"  {{selected}}>
+       <span>Désactivé</span>
+       </label>
+       </p>
+       
+        </td>
+
+        <td>{{ item.creationdate }}</td>
+        <td>{{ item.modificationdate }}</td>
+        <td>
+         <label for ="suppression">
+        <input type="checkbox" class="filled-in" id="supression" name="supression" form="{{"form" ~ item.id}}" value="del" >
+         <span></span>
+         </label>
+
+        </td>
+        <td><input form="{{"form" ~ item.id}}" type="submit" value="valider" /></td>
+    </tr>
+</form>
+{% endfor %}   
+</table>
+
+
+
